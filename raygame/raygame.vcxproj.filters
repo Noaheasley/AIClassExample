@@ -12,6 +12,9 @@
     <Filter Include="Textures">
       <UniqueIdentifier>{b5a36503-1ac1-44c6-bd0b-b12682cdd3b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ai">
+      <UniqueIdentifier>{f97218ae-eb5c-46fd-8384-c9b00014812e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -35,14 +38,17 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Ai</Filter>
+    </ClCompile>
     <ClCompile Include="Agent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Ai</Filter>
     </ClCompile>
     <ClCompile Include="Behavior.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Ai</Filter>
     </ClCompile>
     <ClCompile Include="SeekBehavior.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Ai</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,17 +70,20 @@
     <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Ai</Filter>
+    </ClInclude>
     <ClInclude Include="Agent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Ai</Filter>
     </ClInclude>
     <ClInclude Include="Behavior.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SteeringBehavior.h">
-      <Filter>Header Files</Filter>
+      <Filter>Ai</Filter>
     </ClInclude>
     <ClInclude Include="SeekBehavior.h">
-      <Filter>Header Files</Filter>
+      <Filter>Ai</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehavior.h">
+      <Filter>Ai</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

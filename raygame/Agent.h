@@ -29,6 +29,7 @@ public:
 
     void addForce(MathLibrary::Vector2 force);
     void update(float deltaTime);
+    void addBehavior(Behavior* behavior);
 private:
 	MathLibrary::Vector2 m_force;
 	float m_maxForce;

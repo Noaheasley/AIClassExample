@@ -30,9 +30,25 @@ public:
     void addForce(MathLibrary::Vector2 force);
     void update(float deltaTime);
     void addBehavior(Behavior* behavior);
+
+    template<typename BehaviorType>
+    BehaviorType* getBehaviour();
+    Behavior* getBehaviour(int index) { return m_behaviors[index]; }
 private:
 	MathLibrary::Vector2 m_force;
 	float m_maxForce;
 	std::vector<Behavior*> m_behaviors;
 };
 
+template<typename BehaviorType>
+inline BehaviorType* Agent::getBehaviour()
+{
+    for (int i = 0; i < m_behaviors.size(); i++)
+    {
+        BehaviorType* behavior = dynamic_cast<BehaviorType*>(m_behaviours[i]);
+
+        if(behavior)
+            return behavior
+    }
+    return nullptr;
+}

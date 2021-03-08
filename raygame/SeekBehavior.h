@@ -16,6 +16,5 @@ public:
 	void update(Agent* agent, float deltaTime) override;
 private:
 	Actor* m_target;
-	float m_seekForce;
 };
 

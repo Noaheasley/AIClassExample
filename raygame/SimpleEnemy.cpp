@@ -4,15 +4,21 @@
 bool SimpleEnemy::checkTargetInSight()
 {
 	//checks if target is null. if so return false
-
+	if (getTarget() == NULL)
+		return false;
 	//find the direction vector that represent where the target is relative to the enemy
+	MathLibrary::Vector2 direction = getTarget()->getWorldPosition() - getWorldPosition();
 
 	//find the dot product of the enemy's forward and direction vector
+	MathLibrary::Vector2::dotProduct(getTarget()->getForward(), direction);
 
 	//find the angle using the dot product 
+	float angle = (float)MathLibrary::Vector2::findAngle(getTarget()->getForward(), direction);
 
 	//check if that angle is greater than the enemy's  viewing angle(any value you see fit is fine)
-
+	if (angle > 2)
+		//returns if the enemy saw something
+		return true;
 	//returns if the enemy saw nothing
 	return false;
 }
@@ -54,7 +60,7 @@ void SimpleEnemy::update(float deltaTime)
 	Enemy::update(deltaTime);
 }
 
-void SimpleEnemy::setTarget(Actor* target)
+void SimpleEnemy::setTarget(Agent* target)
 {
 	Enemy::setTarget(target);
 	m_seekBehavior->setTarget(target);

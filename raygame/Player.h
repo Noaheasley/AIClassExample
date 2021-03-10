@@ -4,7 +4,7 @@
 class Player : public Character
 {
 public:
-	Player() : Character() {}
+	Player() : Character() { }
 	Player(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float maxForce);
 	void update(float deltatime) override;
 	void debug() override;

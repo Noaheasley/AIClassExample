@@ -20,7 +20,7 @@ class SimpleEnemy :
 	void start() override;
 	void update(float deltaTime) override;
 
-	void setTarget(Actor* target);
+	void setTarget(Agent* target);
 private:
 	EnemyState m_currentState;
 	WanderBehavior* m_wanderBehavior;

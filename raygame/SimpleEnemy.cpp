@@ -23,13 +23,17 @@ bool SimpleEnemy::checkTargetInSight()
 	return false;
 }
 
-void SimpleEnemy::onCollision(Actor* other)
+void SimpleEnemy::onCollision(Character* other)
 {
 	//checks to see if the enemy ran into the player
-
-	//if the enemy has run into the player, deal damage to the player
-
+	if (getWorldPosition() == other->getWorldPosition())
+	{
+		//if the enemy has run into the player, deal damage to the player
+		other->takeDamage(1);
+	}
 	//if the player's health is less than 0, set target to nullptr
+	if (other->getHealth() <= 0)
+		setTarget(nullptr);
 }
 
 void SimpleEnemy::start()

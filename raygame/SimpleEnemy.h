@@ -16,7 +16,7 @@ class SimpleEnemy :
 	using Enemy::Enemy;
 	bool checkTargetInSight();
 
-	void onCollision(Actor* other) override;
+	void onCollision(Character* other);
 	void start() override;
 	void update(float deltaTime) override;
 

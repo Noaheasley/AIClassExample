@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Agent.h"
 #include "SeekBehavior.h"
+#include "Graph.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -32,21 +33,27 @@ void Game::start()
 	m_camera->zoom = 1;
 	Player* player = new Player(10, 10, 5, "Images/player.png", 5, 10);
 	Agent* enemy = new Agent(20, 20, 1, "Images/enemy.png", 10, 10);
-	SeekBehavior* seek = new SeekBehavior(player, 1);
-	enemy->addBehavior(seek);
+	//SeekBehavior* seek = new SeekBehavior(player, 1);
+	//enemy->addBehavior(seek);
 	Scene* scene = new Scene();
 	scene->addActor(player);
 	scene->addActor(enemy);
-	addScene(scene);
+	//addScene(scene);
 	SetTargetFPS(60);
+
+	Graph* graph = new Graph(10, 10, 10, 1);
+	graph->setWorldPostion({2,2});
+	graph->BFS(0, 0, 0, 1);
+	Scene* pathfinding = new Scene();
+	pathfinding->addActor(graph);
+
+	addScene(pathfinding);
+
 }
 
 void Game::update(float deltaTime)
 {
-	for (int i = 0; i < m_sceneCount; i++)
-	{
-		m_scenes[i]->update(deltaTime);
-	}
+	getCurrentScene()->update(deltaTime);
 }
 
 void Game::draw()
@@ -56,10 +63,7 @@ void Game::draw()
 	BeginMode2D(*m_camera);
 	ClearBackground(BLACK);
 
-	for (int i = 0; i < m_sceneCount; i++)
-	{
-		m_scenes[i]->draw();
-	}
+	getCurrentScene()->draw();
 
 	EndMode2D();
 	EndDrawing();

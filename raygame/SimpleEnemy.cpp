@@ -45,8 +45,8 @@ void SimpleEnemy::start()
 	m_currentState = WANDER;
 
 	//initalize member variables
-	m_seekBehavior = getBehaviour<SeekBehavior>();
-	m_wanderBehavior = getBehaviour<WanderBehavior>();
+	//m_seekBehavior = getBehaviour<SeekBehavior>();
+	//m_wanderBehavior = getBehaviour<WanderBehavior>();
 
 	//set the target to be the base class target
 	setTarget(Enemy::getTarget());

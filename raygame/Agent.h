@@ -40,17 +40,17 @@ private:
 	std::vector<Behavior*> m_behaviors;
 };
 
-template<typename BehaviorType>
-inline BehaviorType* Agent::getBehaviour()
-{
-    //iterate through the list of behaviors
-    for (int i = 0; i < m_behaviors.size(); i++)
-    {
-        //attempt to cast behaviors
-        BehaviorType* behavior = dynamic_cast<BehaviorType*>(m_behaviors[i]);
-
-        if (behavior)
-            return behavior;
-    }
-    return nullptr;
-}
+//template<typename BehaviorType>
+//inline BehaviorType* Agent::getBehaviour()
+//{
+//    //iterate through the list of behaviors
+//    for (int i = 0; i < m_behaviors.size(); i++)
+//    {
+//        //attempt to cast behaviors
+//        BehaviorType* behavior = dynamic_cast<BehaviorType*>(m_behaviors[i]);
+//
+//        if (behavior)
+//            return behavior;
+//    }
+//    return nullptr;
+//}

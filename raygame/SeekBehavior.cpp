@@ -1,17 +1,17 @@
 #include "SeekBehavior.h"
 #include "Agent.h"
 
-SeekBehavior::SeekBehavior()
-{
-	m_target = nullptr;
-	setForceScale(1);
-}
-
-SeekBehavior::SeekBehavior(Actor* target, float seekForce)
-{
-	m_target = target;
-	setForceScale(seekForce);
-}
+//SeekBehavior::SeekBehavior()
+//{
+//	m_target = nullptr;
+//	setForceScale(1);
+//}
+//
+//SeekBehavior::SeekBehavior(Actor* target, float seekForce)
+//{
+//	m_target = target;
+//	setForceScale(seekForce);
+//}
 
 MathLibrary::Vector2 SeekBehavior::calculateForce(Agent* agent)
 {

@@ -92,6 +92,7 @@ void Graph::dijkstra(int startX, int startY, int goalX, int goalY)
 	//Create a node pointer that points to the goal node
 	Node* start = getNode(startX, startY);
 	Node* goal = getNode(goalX, goalY);
+	int nodeCount = 0;
 
 	//Check if the start or the goal pointer is null
 	if (!goal || !start)
@@ -118,14 +119,25 @@ void Graph::dijkstra(int startX, int startY, int goalX, int goalY)
 	while (!open.empty())
 	{
 		//Sort the items in the open list by the g score
-
+		Node* it = currentNode;
+		Node* ti = goal;
+		for (int i = 0; i < nodeCount; i++)
+		{
+			for (int j = nodeCount - 1; j > i; j--)
+			{
+				Node* temp = ti;
+				ti = it;
+				it = temp;
+			}
+		}
 		//Set the iterator to be the first item in the open list
-
+		currentNode = start;
 		//Check if the iterator is pointing to the goal node
-
+		if (currentNode == goal)
+		{
 			//Mark the goal as being found by changing its color
 			//Return the new path found
-
+		}
 		//end if statement
 
 		//Pop the first item off the open list

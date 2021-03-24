@@ -43,7 +43,7 @@ void Game::start()
 
 	Graph* graph = new Graph(10, 10, 10, 1);
 	graph->setWorldPostion({2,2});
-	graph->BFS(0, 0, 0, 1);
+	graph->BFS(0, 0, 9, 1);
 	Scene* pathfinding = new Scene();
 	pathfinding->addActor(graph);
 

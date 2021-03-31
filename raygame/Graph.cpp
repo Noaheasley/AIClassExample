@@ -26,6 +26,18 @@ void Graph::update(float deltaTime)
 		m_nodes[i]->update(deltaTime);
 }
 
+Node* Graph::checkList(std::deque<Node*> list, Node* lookingFor)
+{
+	for (int i = 0; i < list.size(); i++)
+	{
+		if (list[i] = lookingFor)
+		{
+			return lookingFor;
+		}
+	}
+}
+
+
 void Graph::BFS(int startX, int startY, int goalX, int goalY)
 {
 	//get a refrence to the start and end node
@@ -89,92 +101,126 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 //Create a node pointer that points to the start node
 void Graph::dijkstra(int startX, int startY, int goalX, int goalY)
 {
-	//Create a node pointer that points to the goal node
+	//Create a node pointer that points to the start node
 	Node* start = getNode(startX, startY);
+	//Create a node pointer that points to the goal node
 	Node* goal = getNode(goalX, goalY);
-	int nodeCount = 0;
 
 	//Check if the start or the goal pointer is null
-	if (!goal || !start)
+	if (!start || !goal)
 	{
 		//return an empty list
 		return;
+		//end if statement
 	}
-	//end if statement
 
 	//Set the start nodes color to be green
 	start->color = ColorToInt(GREEN);
-	start->visited = true;
+	start->gScore = 0;
+
 	//Create a node pointer that will be act as an iterator for the graph
-	Node* currentNode = start;
+	Node* currentNode;
 	//Create an open list
-	std::deque<Node*> open;
+	std::deque<Node*> openList;
 	//Create a closed list
-	std::deque<Node*> closed;
+	std::deque<Node*> closedList;
 
 	//Add start to the open list
-	open.push_front(start);
+	openList.push_front(start);
 
 	//Loop while the open list is not empty
-	while (!open.empty())
+	while (!openList.empty())
 	{
 		//Sort the items in the open list by the g score
-		Node* it = currentNode;
-		Node* ti = goal;
-		for (int i = 0; i < nodeCount; i++)
-		{
-			for (int j = nodeCount - 1; j > i; j--)
-			{
-				Node* temp = ti;
-				ti = it;
-				it = temp;
-			}
-		}
+		bubbleSort(openList);
+
 		//Set the iterator to be the first item in the open list
-		currentNode = start;
+		currentNode = openList[0];
+
 		//Check if the iterator is pointing to the goal node
 		if (currentNode == goal)
 		{
 			//Mark the goal as being found by changing its color
+			currentNode->color = ColorToInt(YELLOW);
 			//Return the new path found
+			return;
+
+			//end if statement
 		}
-		//end if statement
+		Node* currentItem;
 
 		//Pop the first item off the open list
+		openList.pop_front();
+
 		//Add the first item to the closed list
+		closedList.push_front(currentItem);
 
 		//Loop through all of the edges for the iterator
-
+		for (int i = 0; i = currentNode->edges.size(); i++)
+		{
 			//Create a node pointer to store the other end of the edge
+			Node* currentEdgeEnd = nullptr;
 
 			//Check if the iterator is on the second end of the node
+			if (currentNode == currentNode->edges[i]->connectedNode2)
+			{
 				//Set the edge end pointer to be the first end of the node
+				currentEdgeEnd = currentNode->edges[i]->connectedNode1;
+			}
 			//Otherwise if the iterator is on the first end of the node...
+			else
+			{
 				//set the edge end pointer to be the second end of the node
-			// end if statement
+				currentEdgeEnd = currentNode->edges[i]->connectedNode2;
 
-			//Check if node at the end of the edge is in the closed list
+				// end if statement
+			}
 
-				//Create an int and set it to be the g score of the iterator plus the cost of the edge
+			//Check if node at the end of the edge is in the closed list | WHAT DO I DO?! |
+			if (checkList(closedList, currentEdgeEnd))
+			{
 
+				//Create a float and set it to be the g score of the iterator plus the cost of the edge
+				float currentGScore = currentNode->gScore + currentNode->edges[i]->cost;
 
-				//Check if the node at the end ofthe edge is in the open list
-
+				//Check if the node at the end of the edge is in the open list
+				if (checkList(openList, currentEdgeEnd))
+				{
 					//Mark the node as visited by changing its color
+					currentEdgeEnd->color = ColorToInt(RED);
+
 					//Set the nodes g score to be the g score calculated earlier
+					currentEdgeEnd->gScore = currentGScore;
+
 					//Set the nodes previous to be the iterator
+					currentEdgeEnd->edges[i]->connectedNode1 = currentEdgeEnd;
+
 					//Add the node to the open list
+					openList.push_back(currentEdgeEnd);
+
+				}
 
 				//Otherwise if the g score is less than the node at the end of the edge's g score...
-
+				else
+				{
 					//Mark the node as visited by changing its color
-					//Set its g score to be the g score calculated earlier
-					//Set its previous to be the current node
+					currentEdgeEnd->color = ColorToInt(RED);
+					currentEdgeEnd->visited;
 
-				//end if statement
+					//Set its g score to be the g score calculated earlier
+					currentEdgeEnd->gScore = currentGScore;
+
+					//Set its previous to be the current node
+					currentEdgeEnd->edges[i]->connectedNode1 = currentNode;
+
+
+					//end if statement
+				}
+			}
+		}
 		//end loop
-	}
 	//end loop
+	}
 }
 
 //Create a node pointer that points to the start node
@@ -246,6 +292,22 @@ void Graph::astar(int startX, int startY, int goalX, int goalY)
 			//end if statement
 	//end loop
 //end loop
+}
+
+void Graph::bubbleSort(std::deque<Node*> node)
+{
+	for (int i = 0; i < node.size(); i++)
+	{
+		for (int j = node.size() - 1; j > i; j--)
+		{
+			if (node[j] < node[j - 1])
+			{
+				Node* temp = node[j];
+				node[j] = node[j - 1];
+				node[j - 1] = temp;
+			}
+		}
+	}
 }
 
 Node* Graph::getNode(int xPos, int yPos)

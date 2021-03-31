@@ -15,6 +15,7 @@ public:
 	MathLibrary::Vector2 graphPosition;
 	int color = 0xFFFFFFFF;
 	int size = 1;
+	float gScore;
 	void draw() override;
 	void update(float deltaTime);
 };

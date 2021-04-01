@@ -3,6 +3,7 @@
 #include "Edge.h"
 #include <raylib.h>
 #include <deque>
+#include <iostream>
 
 Graph::Graph(int width, int height, int nodeSize, int nodeSpacing)
 {
@@ -147,16 +148,15 @@ void Graph::dijkstra(int startX, int startY, int goalX, int goalY)
 
 			//end if statement
 		}
-		Node* currentItem;
 
 		//Pop the first item off the open list
 		openList.pop_front();
 
 		//Add the first item to the closed list
-		closedList.push_front(currentItem);
+		closedList.push_front(currentNode);
 
 		//Loop through all of the edges for the iterator
-		for (int i = 0; i = currentNode->edges.size(); i++)
+		for (int i = 0; i < currentNode->edges.size(); i++)
 		{
 			//Create a node pointer to store the other end of the edge
 			Node* currentEdgeEnd = nullptr;
@@ -181,7 +181,7 @@ void Graph::dijkstra(int startX, int startY, int goalX, int goalY)
 			{
 
 				//Create a float and set it to be the g score of the iterator plus the cost of the edge
-				float currentGScore = currentNode->gScore + currentNode->edges[i]->cost;
+	 			float currentGScore = currentNode->gScore + currentNode->edges[i]->cost;
 
 				//Check if the node at the end of the edge is in the open list
 				if (checkList(openList, currentEdgeEnd))
@@ -193,7 +193,7 @@ void Graph::dijkstra(int startX, int startY, int goalX, int goalY)
 					currentEdgeEnd->gScore = currentGScore;
 
 					//Set the nodes previous to be the iterator
-					currentEdgeEnd->edges[i]->connectedNode1 = currentEdgeEnd;
+					currentEdgeEnd->previous = currentNode;
 
 					//Add the node to the open list
 					openList.push_back(currentEdgeEnd);
@@ -211,8 +211,7 @@ void Graph::dijkstra(int startX, int startY, int goalX, int goalY)
 					currentEdgeEnd->gScore = currentGScore;
 
 					//Set its previous to be the current node
-					currentEdgeEnd->edges[i]->connectedNode1 = currentNode;
-
+					currentEdgeEnd->previous = currentNode;
 
 					//end if statement
 				}

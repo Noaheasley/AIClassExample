@@ -11,6 +11,7 @@ class Node :
 public:
 	bool visited;
 	Node(int x, int y, int nodeSize);
+	Node* previous;
 	std::vector<Edge*> edges;
 	MathLibrary::Vector2 graphPosition;
 	int color = 0xFFFFFFFF;
